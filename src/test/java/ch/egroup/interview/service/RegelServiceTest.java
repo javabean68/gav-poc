@@ -4,9 +4,11 @@ import ch.egroup.interview.domain.anagraphics.Branche;
 import ch.egroup.interview.domain.anagraphics.Gav;
 import ch.egroup.interview.domain.anagraphics.Kunde;
 import ch.egroup.interview.domain.anagraphics.Mitarbeiter;
+import ch.egroup.interview.domain.rules.Regel;
 import ch.egroup.interview.domain.rules.composition.OverwriteStrategy;
 import ch.egroup.interview.domain.rules.concrete.ArbeitzeitRegel;
 import ch.egroup.interview.domain.rules.concrete.FerienRegel;
+import ch.egroup.interview.domain.rules.concrete.LohnRegel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,17 +44,22 @@ class RegelServiceTest {
 
         //assert
         Assertions.assertAll(
-                () -> assertTrue(gav.getRegeln().size() == 2),
+                () -> assertTrue(gav.getRegeln().size() == 3),
                 () -> assertTrue(gav.getRegeln().
                         stream().
                         filter(r -> r instanceof  ArbeitzeitRegel).
-                        findFirst().map(r -> r.getDescription()).
+                        findFirst().map(Regel::getDescription).
                         filter(s -> s.contains("Mitarbeiter abgemacht Arbeitszeit Regelung")).stream().findFirst().isPresent()),
                 () -> assertTrue(gav.getRegeln().
                         stream().
                         filter(r -> r instanceof  FerienRegel).
-                        findFirst().map(r -> r.getDescription()).
-                        filter(s -> s.contains("Beim Kunden geltend Ferien Regelung")).stream().findFirst().isPresent()));
+                        findFirst().map(Regel::getDescription).
+                        filter(s -> s.contains("Beim Kunden geltend Ferien Regelung")).stream().findFirst().isPresent()),
+                () -> assertTrue(gav.getRegeln().
+                        stream().
+                        filter(r -> r instanceof  LohnRegel).
+                        findFirst().map(Regel::getDescription).
+                        filter(s -> s.contains("Bei Branch geltend Lohn Regelung")).stream().findFirst().isPresent()));
     }
 
     private Branche buildBrancheEbene() {
@@ -67,9 +74,15 @@ class RegelServiceTest {
         brancheFerienRegel.setCompositionStrategy(new OverwriteStrategy());  //Replaceable?
         brancheFerienRegel.setMaxNumOfDays(60);
 
+        LohnRegel brancheLohnRegel = new LohnRegel();
+        brancheLohnRegel.setDescription("Bei Branch geltend Lohn Regelung");
+        brancheLohnRegel.setCompositionStrategy(new OverwriteStrategy());  //Replaceable?
+        brancheLohnRegel.setMinLohn(1000);
+
         //TODO Protective Kopie
         branche.getRegels().add(brancheArbeitzeitRegel);
         branche.getRegels().add(brancheFerienRegel);
+        branche.getRegels().add(brancheLohnRegel);
         return branche;
     }
 
