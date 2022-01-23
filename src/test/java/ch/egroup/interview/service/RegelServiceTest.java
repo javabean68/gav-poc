@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -79,10 +78,9 @@ class RegelServiceTest {
         brancheLohnRegel.setCompositionStrategy(new OverwriteStrategy());  //Replaceable?
         brancheLohnRegel.setMinLohn(1000);
 
-        //TODO Protective Kopie
-        branche.getRegels().add(brancheArbeitzeitRegel);
-        branche.getRegels().add(brancheFerienRegel);
-        branche.getRegels().add(brancheLohnRegel);
+        branche.addRegel(brancheArbeitzeitRegel);
+        branche.addRegel(brancheFerienRegel);
+        branche.addRegel(brancheLohnRegel);
         return branche;
     }
 
@@ -91,20 +89,21 @@ class RegelServiceTest {
 
         FerienRegel kundeFerienRegel = new FerienRegel();
         kundeFerienRegel.setDescription("Beim Kunden geltend Ferien Regelung");
-        kundeFerienRegel.setCompositionStrategy(new OverwriteStrategy());  //Replaceable?
+        kundeFerienRegel.setCompositionStrategy(new OverwriteStrategy());  //TODO: Both Replaceable?
 
-        //TODO Protective Kopie
-        kunde.getRegels().add(kundeFerienRegel);
+        kunde.addRegel(kundeFerienRegel);
         return kunde;
     }
 
     private Mitarbeiter buildMitarbeiterEben() {
         Mitarbeiter mitarbeiter = new Mitarbeiter();
+
         ArbeitzeitRegel mitarbeiterArbeitzeitRegel = new ArbeitzeitRegel();
         mitarbeiterArbeitzeitRegel.setDescription("Mitarbeiter abgemacht Arbeitszeit Regelung");
         mitarbeiterArbeitzeitRegel.setPauseDuration(15);
         mitarbeiterArbeitzeitRegel.setCompositionStrategy(new OverwriteStrategy());
-        mitarbeiter.getRegels().add(mitarbeiterArbeitzeitRegel);
+
+        mitarbeiter.addRegel(mitarbeiterArbeitzeitRegel);
         return mitarbeiter;
     }
 }

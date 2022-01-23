@@ -31,7 +31,7 @@ class MitarbeiterTest {
         arbeitzeitRegel.setPauseDuration(15);
         arbeitzeitRegel.setDescription("A specific rule for the current employee blah blah :)" +
                 "");
-        mitarbeiter.setRegels(Set.of(arbeitzeitRegel));
+        mitarbeiter.addRegel(arbeitzeitRegel);
 
         //act
         mitarbeitRepository.save(mitarbeiter);

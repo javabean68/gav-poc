@@ -3,6 +3,7 @@ package ch.egroup.interview.domain.anagraphics;
 import ch.egroup.interview.domain.rules.Regel;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -24,13 +25,13 @@ public class Kunde {
 
     @OneToMany(mappedBy = "kunde", cascade = CascadeType.REFRESH, orphanRemoval = true)
 
-    private Set<Regel> regels = new LinkedHashSet<>();
+    private Set<Regel> regels = new HashSet<>();
 
     public Set<Regel> getRegels() {
-        return regels;
+        return new HashSet<>(regels);
     }
 
-    public void setRegels(Set<Regel> regels) {
-        this.regels = regels;
+    public void addRegel(Regel newRegel){
+        regels.add(newRegel);
     }
 }
