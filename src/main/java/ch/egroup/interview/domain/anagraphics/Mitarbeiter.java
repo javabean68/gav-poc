@@ -1,9 +1,10 @@
 package ch.egroup.interview.domain.anagraphics;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import ch.egroup.interview.domain.rules.Regel;
+
+import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 public class Mitarbeiter {
@@ -13,6 +14,9 @@ public class Mitarbeiter {
 
 	private String firstName;
 	private String lastName;
+
+	@OneToMany(mappedBy = "mitarbeiter", cascade = CascadeType.REFRESH, orphanRemoval = true)
+	private Set<Regel> regels = new LinkedHashSet<>();
 
 	public String getFirstName() {
 		return firstName;
@@ -28,5 +32,13 @@ public class Mitarbeiter {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Set<Regel> getRegels() {
+		return regels;
+	}
+
+	public void setRegels(Set<Regel> regels) {
+		this.regels = regels;
 	}
 }

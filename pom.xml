@@ -9,8 +9,8 @@
 		<version>2.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>accessing-data-rest-complete</artifactId>
+	<groupId>ch.egroup</groupId>
+	<artifactId>gav-poc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>accessing-data-rest-complete</name>
 	<description>Demo project for Spring Boot</description>

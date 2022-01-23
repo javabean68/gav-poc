@@ -1,5 +1,6 @@
 package ch.egroup.interview.domain.rules;
 
+import ch.egroup.interview.domain.anagraphics.Mitarbeiter;
 import ch.egroup.interview.domain.rules.composition.CompositionStrategy;
 import ch.egroup.interview.domain.rules.composition.CompositionStrategyConverter;
 import ch.egroup.interview.domain.rules.concrete.ArbeitzeitRegel;
@@ -49,6 +50,10 @@ public abstract class Regel {
 
     @Convert(converter = CompositionStrategyConverter.class)
     protected CompositionStrategy compositionStrategy;
+
+    @ManyToOne
+    @JoinColumn(name = "mitarbeiter_id")
+    private Mitarbeiter mitarbeiter;
 
     public Set<? super Regel> addToSet(Set<? super Regel> inputSet){
         //apply current strategy
