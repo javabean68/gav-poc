@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Die Regel wird überschrieben.
+ * TODO: Es sollte überprüfen ob eine Regel dergleichen Art schon vorhanden ist und
+ * ob sie auch ist mit der Strategy Overwrite kenngezeichet, sonst eine Exception werfen
+ */
 public class OverwriteStrategy implements CompositionStrategy {
     @Override
     public void composeWith(Set<? super Regel> targetSet, Regel anotherRegel) {

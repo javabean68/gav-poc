@@ -1,27 +1,27 @@
 package ch.egroup.interview.domain.anagraphics;
 
 import ch.egroup.interview.domain.rules.Regel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "kunde")
+
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Getter
 public class Kunde {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @OneToMany(mappedBy = "kunde", cascade = CascadeType.REFRESH, orphanRemoval = true)
 
