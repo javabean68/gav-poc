@@ -1,5 +1,7 @@
 package ch.egroup.interview.domain.rules;
 
+import ch.egroup.interview.domain.anagraphics.Branche;
+import ch.egroup.interview.domain.anagraphics.Kunde;
 import ch.egroup.interview.domain.anagraphics.Mitarbeiter;
 import ch.egroup.interview.domain.rules.composition.CompositionStrategy;
 import ch.egroup.interview.domain.rules.composition.CompositionStrategyConverter;
@@ -11,7 +13,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -54,6 +55,14 @@ public abstract class Regel {
     @ManyToOne
     @JoinColumn(name = "mitarbeiter_id")
     private Mitarbeiter mitarbeiter;
+
+    @ManyToOne
+    @JoinColumn(name = "branche_id")
+    private Branche branche;
+
+    @ManyToOne
+    @JoinColumn(name = "kunde_id")
+    private Kunde kunde;
 
     public Set<? super Regel> addToSet(Set<? super Regel> inputSet){
         //apply current strategy
