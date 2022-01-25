@@ -8,7 +8,7 @@ http://localhost:8080/h2-console/
 jdbc:h2:C:/Projects/eGroup/gav/data/demo
 
 #### Security
-Die Rest Methoden sind nur die Rolle 'USER' zugreifbar
+Die Rest Methoden sind nur für die Rolle 'USER' zugreifbar
 
 #### curl
 - DOS Prompt
