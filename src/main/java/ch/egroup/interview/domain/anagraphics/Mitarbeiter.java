@@ -4,9 +4,7 @@ import ch.egroup.interview.domain.rules.Regel;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 
@@ -25,6 +23,9 @@ public class Mitarbeiter {
 
 	@OneToMany(mappedBy = "mitarbeiter", cascade = CascadeType.REFRESH, orphanRemoval = true)
 	private Set<Regel> regels = new LinkedHashSet<>();
+
+	@OneToMany(mappedBy = "mitarbeiter", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<MitarbeiterOptionalField> mitarbeiterOptionalFields = new ArrayList<>();
 
 	public Set<Regel> getRegels() {
 		return new HashSet<>(regels);

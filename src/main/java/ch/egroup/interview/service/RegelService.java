@@ -10,13 +10,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 @Service
+/**
+ * https://docs.spring.io/spring-security/site/docs/3.0.x/reference/el-access.html
+ */
 public class RegelService {
 
     @Autowired
     GavRepository gavRepository;
 
-    @PreAuthorize("hasRole('ADMIN')   && " +
-            "#username == principal.username")
+    @PreAuthorize("hasRole('ADMIN') && #mitarbeiter.firstname == principal.username")
     Gav buildGav(Mitarbeiter mitarbeiter, Kunde kunde, Branche branche){
         Gav gav = new GavBuilder()
                 .withBranche(branche)
