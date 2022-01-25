@@ -4,6 +4,7 @@ import ch.egroup.interview.domain.rules.concrete.ArbeitzeitRegel;
 import ch.egroup.interview.repository.MitarbeitRepository;
 import ch.egroup.interview.repository.RegelRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -47,6 +48,7 @@ class MitarbeiterTest {
     }
 
     @Test
+    @DisplayName("Die Attribute Alter, Ausbildung, verheiratet ja/nein, Kinder ja/nein und Anzahl zum Mitarbeiter werden abgebildet.")
     @Transactional
     void manageAdditionalField() {
         //arrange
